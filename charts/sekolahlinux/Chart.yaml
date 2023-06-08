@@ -5,4 +5,3 @@ name: sekolahlinux
 sources:
 - https://github.com/machtwatch/helm-private-repo
 type: application
-version: 0.1.7
