@@ -1,0 +1,16 @@
+{{- $name := .Release.Name -}}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ $name }}-test-connection"
+  labels:
+{{ include "app.labels" . | indent 4 }}
+  annotations:
+    helm.sh/hook: test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args:  ['{{ include "server.name" . }}:{{ .Values.service.port }}{{ .Values.server.readiness.path }}']
+  restartPolicy: Never

@@ -1,0 +1,50 @@
+{{- if and .Values.ingress.secondHost.enabled -}}
+{{- $name := .Release.Name -}}
+{{- $pathtype := .Values.ingress.secondHost.pathtype -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $name }}-second
+  labels:
+    {{- include "app.labels" . | nindent 4 }}
+  annotations:
+    {{- if and .Values.ingress.secondHost.tls .Values.ingress.secondHost.issuer }}
+    {{- if .Values.ingress.secondHost.issuer.namespaced }}
+    cert-manager.io/issuer: {{ .Values.ingress.secondHost.issuer.name }}
+    {{- else }}
+    cert-manager.io/cluster-issuer: {{ .Values.ingress.secondHost.issuer.name }}
+    {{- end }}
+    {{- end }}
+    {{- with .Values.ingress.secondHost.class }}
+    kubernetes.io/ingress.class: {{ . | quote }}
+    {{- end }}
+    {{- with .Values.ingress.secondHost.annotations }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  {{- if .Values.ingress.secondHost.tls }}
+  tls:
+    {{- range .Values.ingress.secondHost.tls }}
+    - hosts:
+      {{- range .hosts }}
+        - {{ . | quote }}
+      {{- end }}
+      secretName: {{ $name }}-second
+    {{- end }}
+  {{- end }}
+  rules:
+    {{- range .Values.ingress.secondHost.hosts }}
+    - host: {{ .host | quote }}
+      http:
+        paths:
+          {{- range .paths }}
+          - path: {{ . }}
+            backend:
+              service:
+                name: {{ $name }}
+                port: 
+                  name: http
+            pathType: {{ $pathtype }}
+          {{- end }}
+    {{- end }}
+{{- end }}

@@ -1,0 +1,42 @@
+{{- if and .Values.cronJobs.enabled -}}
+{{- $name := .Release.Name -}}
+{{- $fullName := include "server.name" . -}}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-{{ $fullName }}
+spec:
+  schedule: "{{ .Values.cronJobs.schedule }}"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          {{- with .Values.cronJobs.pullSecrets }}
+          imagePullSecrets: {{ .  }}
+          {{- end }}
+          {{- with .Values.cronJobs.nodeSelector }} 
+          nodeSelector:
+            {{- toYaml . | nindent 8 }}
+          {{- end }}
+          {{- with .Values.cronJobs.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 8 }}
+          {{- end }}
+          containers:
+          - name: cron-{{ $fullName }}
+            image: "{{ .Values.cronJobs.image }}"
+            imagePullPolicy: {{ .Values.cronJobs.pullPolicy }}
+            {{- with .Values.cronJobs.command }}
+            command:
+              {{- range . }}
+              - {{ . | quote }}
+              {{- end }}
+            {{- end }}
+            {{- with .Values.cronJobs.args }}
+            args:
+              {{- range . }}
+              - {{ . | quote }}
+              {{- end }}
+            {{- end }}
+          restartPolicy: OnFailure
+{{- end }}

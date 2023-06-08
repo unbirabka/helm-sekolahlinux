@@ -1,0 +1,17 @@
+{{- if .Values.configMap.enabled -}}
+{{- $name := .Release.Name -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- include "app.labels" . | nindent 4 }}
+  annotations:
+    {{- with .Values.configMap.annotations }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+{{- with .Values.configMap.data }}
+data:
+  {{- toYaml . | nindent 2 }}
+{{- end }}
+{{- end }}

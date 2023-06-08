@@ -1,0 +1,14 @@
+{{- if and .Values.pdb.enabled -}}
+{{- $name := .Release.Name -}}
+{{- $fullName := include "server.name" . -}}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ $fullName }}
+spec:
+  minAvailable: {{ .Values.pdb.minAvailable }}
+  selector:
+    matchLabels:
+      name: {{ $fullName }}
+      env: {{ .Values.meta.env }}
+{{- end }}

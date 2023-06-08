@@ -1,0 +1,37 @@
+name: Update Helm Chart
+
+on:
+  workflow_dispatch:
+    inputs:
+      service-name:
+        required: true
+        type: choice
+        options:
+        - sekolahlinux
+      tags:
+        description: 'version (ex: 0.1.0)'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v2
+      - name: Helm Installation
+        uses: azure/setup-helm@v1.1
+        with:
+          version: v3.7.0
+      - name: Update Index
+        run: |
+          cd charts
+          helm package ${{ inputs.service-name }} --version ${{ inputs.tags }}
+          helm repo index .
+          git config --global user.email "admin@sekolahlinux.com"
+          git config --global user.name "admin"
+          git add -A && git commit -m "update helm chart"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          branch: master
