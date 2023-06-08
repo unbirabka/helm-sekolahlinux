@@ -1,0 +1,16 @@
+apiVersion: v1
+entries:
+  app:
+  - apiVersion: v2
+    created: "2023-06-08T16:29:57.023789275Z"
+    description: A Helm chart for general app
+    digest: c53e9ec19379daf6de867a68e056a5c3603b4377e66585fdc9f31284fa35fdf3
+    home: https://github.com/machtwatch/helm-private-repo
+    name: app
+    sources:
+    - https://github.com/machtwatch/helm-private-repo
+    type: application
+    urls:
+    - app-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-06-08T16:29:57.022597567Z"
