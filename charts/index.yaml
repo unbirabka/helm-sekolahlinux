@@ -1,0 +1,16 @@
+apiVersion: v1
+entries:
+  sekolahlinux:
+  - apiVersion: v2
+    created: "2025-05-08T16:39:47.03472464Z"
+    description: A Helm chart for general app
+    digest: 3d999dbf9b4424e4c9806ea16d14405b8e7eace3eef23f6c11aded5f99539a71
+    home: https://github.com/unbirabka/helm-sekolahlinux
+    name: sekolahlinux
+    sources:
+    - https://github.com/unbirabka/helm-sekolahlinux
+    type: application
+    urls:
+    - sekolahlinux-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-05-08T16:39:47.033603933Z"
