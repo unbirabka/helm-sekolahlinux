@@ -2,7 +2,19 @@ apiVersion: v1
 entries:
   sekolahlinux:
   - apiVersion: v2
-    created: "2023-06-08T16:47:53.332724724Z"
+    created: "2025-05-08T01:11:10.054729853Z"
+    description: A Helm chart for general app
+    digest: 6e6c54570ab52590c6c12beed764f9723e8e5cd83d515bdf84cb5bb56241dd89
+    home: https://github.com/machtwatch/helm-private-repo
+    name: sekolahlinux
+    sources:
+    - https://github.com/machtwatch/helm-private-repo
+    type: application
+    urls:
+    - sekolahlinux-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    created: "2025-05-08T01:11:10.053970618Z"
     description: A Helm chart for general app
     digest: e289fcc0c53a7cd808dee937160d065ccf53ddaf4f53cdb8a1c55b8e1c05764a
     home: https://github.com/machtwatch/helm-private-repo
@@ -13,4 +25,4 @@ entries:
     urls:
     - sekolahlinux-0.1.0.tgz
     version: 0.1.0
-generated: "2023-06-08T16:47:53.330860483Z"
+generated: "2025-05-08T01:11:10.052955896Z"
