@@ -5,4 +5,4 @@ name: sekolahlinux
 sources:
 - https://github.com/unbirabka/helm-sekolahlinux
 type: application
-version: 0.1.1
+version: 0.1.0
