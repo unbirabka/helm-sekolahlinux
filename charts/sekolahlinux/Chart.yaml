@@ -1,8 +1,8 @@
 apiVersion: v2
 description: A Helm chart for general app
-home: https://github.com/machtwatch/helm-private-repo
+home: https://github.com/unbirabka/helm-sekolahlinux
 name: sekolahlinux
 sources:
-- https://github.com/machtwatch/helm-private-repo
+- https://github.com/unbirabka/helm-sekolahlinux
 type: application
 version: 0.1.1
