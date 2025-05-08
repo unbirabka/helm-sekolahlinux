@@ -1,4 +1,5 @@
 name: Update Helm Chart
+run-name: helm version ${{ inputs.tags }}
 
 on:
   workflow_dispatch:
