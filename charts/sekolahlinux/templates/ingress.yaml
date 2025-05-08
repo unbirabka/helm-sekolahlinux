@@ -14,14 +14,11 @@ metadata:
     {{- else }}
     cert-manager.io/cluster-issuer: {{ .Values.ingress.issuer.name }}
     {{- end }}
-    {{- end }}
-    {{- with .Values.ingress.class }}
-    kubernetes.io/ingress.class: {{ . | quote }}
-    {{- end }}
     {{- with .Values.ingress.annotations }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
+  ingressClassName: {{ .Values.ingress.class }}
   {{- if .Values.ingress.tls }}
   tls:
     {{- range .Values.ingress.tls }}

@@ -15,13 +15,11 @@ metadata:
     cert-manager.io/cluster-issuer: {{ .Values.ingress.secondHost.issuer.name }}
     {{- end }}
     {{- end }}
-    {{- with .Values.ingress.secondHost.class }}
-    kubernetes.io/ingress.class: {{ . | quote }}
-    {{- end }}
     {{- with .Values.ingress.secondHost.annotations }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
+  ingressClassName: {{ .Values.ingress.secondHost.class }}
   {{- if .Values.ingress.secondHost.tls }}
   tls:
     {{- range .Values.ingress.secondHost.tls }}
