@@ -126,21 +126,23 @@ server:
     scrape: true
 
   # paramater dibawah untuk konfigurasi liveness dan readiness sebuah pods
-  liveness:
-    enabled: true
-    config:
-      tcpSocket:
-        port: http
-      initialDelaySeconds: 5
-      periodSeconds: 10
-  readiness:
-    enabled: false
-    config:
-      httpGet:
-        path: /graphql
-        port: http
-      initialDelaySeconds: 15
-      periodSeconds: 20
+  #liveness:
+  #  enabled: true
+  #  config:
+  #    tcpSocket:
+  #      port: http
+  #    initialDelaySeconds: 5
+  #    periodSeconds: 10
+  #readiness:
+  #  enabled: false
+  #  config:
+  #    httpGet:
+  #      path: /graphql
+  #      port: http
+  #    initialDelaySeconds: 15
+  #    periodSeconds: 20
+  liveness: {}
+  readiness: {}
 
   # paramater dibawah untuk set berapa jumlah replica pods, jangan set paramater dibawah jika ingin menggunakan HPA
   # replicas: 2
@@ -299,13 +301,13 @@ ingress:
   # contoh data paramater dibawah
   # tls:
   #   - hosts:
-  #       - test.sekolahlinux.com
+  #       - admin1.sekolahlinux.com
   tls:
     - hosts: []
 
   # contoh data parameter dibawah
   # hosts:
-  #   - host: test.sekolahlinux.com
+  #   - host: admin1.sekolahlinux.com
   #     paths:
   #       - "/"
   hosts: []
@@ -322,13 +324,13 @@ ingress:
     # contoh paramater dibawah
     # tls:
     #   - hosts:
-    #       - kodok.sekolahlinux.com
+    #       - admin2.sekolahlinux.com
     tls:
       - hosts: []
 
     # contoh paramater dibawah
     # hosts: []
-    #  - host: kodok.sekolahlinux.com
+    #  - host: admin2.sekolahlinux.com
     #    paths:
     #      - "/"
     hosts: []
