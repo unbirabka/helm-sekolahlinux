@@ -226,7 +226,59 @@ service:
     #     targetPort: 8090
     #     protocol: TCP
 
-# paramater dibawah untuk mengaktifkan serta set treshold resource hpa
+# paramater dibawah untuk mengaktifkan serta set treshold resource hpa by keda
+keda: 
+  enabled: true
+  # config:
+    # apiVersion: v1
+    # kind: Secret
+    # metadata:
+    #   name: prometheus-secret
+    #   namespace: default
+    # type: Opaque
+    # data:
+    #   username: dXNlcm5hbWU=       # base64 dari 'username'
+    #   password: cGFzc3dvcmQ=       # base64 dari 'password'    
+    # ---
+    # apiVersion: keda.sh/v1alpha1
+    # kind: TriggerAuthentication
+    # metadata:
+    #   name: prometheus-auth
+    #   namespace: default
+    # spec:
+    #   secretTargetRef:
+    #     - parameter: username
+    #       name: prometheus-secret
+    #       key: username
+    #     - parameter: password
+    #       name: prometheus-secret
+    #       key: password    
+    # ---
+    # apiVersion: keda.sh/v1alpha1
+    # kind: ScaledObject
+    # metadata:
+    #   name: your-app-name
+    #   namespace: default
+    # spec:
+    #   scaleTargetRef:
+    #     name: your-app-name-server
+    #   pollingInterval: 10
+    #   cooldownPeriod: 10
+    #   minReplicaCount: 1
+    #   maxReplicaCount: 10
+    #   triggers:
+    #     - type: prometheus
+    #       metadata:
+    #         serverAddress: http://prometheus-server.default.svc:80
+    #         query: |
+    #           round(sum(irate(nginx_ingress_controller_requests{ingress="service-a"}[5m])))
+    #         threshold: "10"
+    #         activationThreshold: "1"
+    #       authenticationRef:
+    #         name: prometheus-auth
+  config: {}
+
+# paramater dibawah untuk mengaktifkan serta set treshold resource hpa k8s native
 autoscaling:
   enabled: true
   annotations: {}
